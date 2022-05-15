@@ -3,6 +3,9 @@ const request = require('request');
 // check if any of the object values are empty
 const isParamEmpty = (parameters) => Object.keys(parameters).every((parameter) => parameters[parameter]);
 
+const keys = ['street', 'city', 'state', 'country'];
+const isParamCorrect = (parameters) => keys.every((key) => parameters.hasOwnProperty(key));
+
 // error thrower for null checks
 const nullCheck = (err, obj) => {
   if (!obj) {
@@ -27,4 +30,6 @@ const makeRequest = (url, params, method) => {
   });
 };
 
-module.exports = { isParamEmpty, nullCheck, makeRequest };
+module.exports = {
+  isParamEmpty, isParamCorrect, nullCheck, makeRequest,
+};

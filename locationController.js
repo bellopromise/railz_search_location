@@ -1,11 +1,18 @@
 const createError = require('http-errors');
-const { isParamEmpty, makeRequest, nullCheck } = require('./util');
+const {
+  isParamEmpty, makeRequest, nullCheck, isParamCorrect,
+} = require('./util');
 
 module.exports.getLocationDetails = async (query) => {
   // validate input
   if (!isParamEmpty(query)) {
     throw createError.BadRequest('Incomplete request data. Please ensure all the fields are populated.');
   }
+
+  if (!isParamCorrect(query)) {
+    throw createError.BadRequest('Invalid parameters. Please ensure data contains street, city, state, and country');
+  }
+
   const address = Object.values(query).join(',');
 
   const geocodeResp = await makeRequest('https://maps.googleapis.com/maps/api/geocode/json', { address }, 'GET');
