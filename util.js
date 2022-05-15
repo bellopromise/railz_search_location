@@ -1,4 +1,4 @@
-const { request } = require("express");
+const request = require('request');
 
 //check if any of the object values are empty
 const isParamEmpty = (parameters)=>{
@@ -8,7 +8,7 @@ const isParamEmpty = (parameters)=>{
 }
 
 //error thrower for null checks
-const isNullOrEmpty = (err, obj)=>{
+const nullCheck = (err, obj)=>{
     if(!obj)
     {
         throw err
@@ -35,4 +35,4 @@ const makeRequest = (url, params, method)=>{
     });
 }
 
-module.exports = { isParamEmpty, isNullOrEmpty, makeRequest }
+module.exports = { isParamEmpty, nullCheck, makeRequest }
